@@ -11,11 +11,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        Cache::remember('articlesAll', 15, function(){
-            return Article::paginate(5);
-        });
-        $articlesAll = Cache::get('articlesAll');
-        // $articlesAll = Article::all();
+        // Cache::remember('articlesAll', 15, function(){
+        //     return Article::paginate(5);
+        // });
+        // $articlesAll = Cache::get('articlesAll');
+        $articlesAll = Article::paginate(5);
         // $articlesAll = json_decode(json_encode($articlesAll));
         // echo "<pre"; print_r($articlesAll); die;
 

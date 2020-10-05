@@ -27,7 +27,9 @@
         <hr>
 
         <!-- Post Content -->
-        {{ $article->content }}
+        <div class="text-justify">
+            {{ $article->content }}
+        </div>
 
         <hr>
 
