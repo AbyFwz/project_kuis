@@ -11,7 +11,7 @@
         <!-- Author -->
         <p class="lead">
         by
-        <a href="#">Start Bootstrap</a>
+        <a href="#">Abyan Fawwaz</a>
         </p>
 
         <hr>

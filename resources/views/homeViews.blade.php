@@ -8,9 +8,9 @@
     <!-- Blog Entries Column -->
     <div class="col-md-8">
 
-        <h1 class="my-4">
+        <h1 class="my-4 justify-content-center">
             @if($articlesAll->count() == 0)
-                Article Kosong
+                Article Tidak Tersedia
             @endif
         </h1>
         @foreach($articlesAll as $art)
@@ -24,7 +24,7 @@
             </div>
             <div class="card-footer text-muted">
                 Posted on {{ $art->created_at->format('d M, Y') }} by
-                <a href="#">Start Bootstrap</a>
+                <a href="#">Abyan Fawwaz</a>
             </div>
         </div>
         @endforeach
