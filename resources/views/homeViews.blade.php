@@ -1,4 +1,4 @@
-@extends('layouts.frontLayouts.front_design')
+@extends('layouts.frontLayout.front_design')
 
 @section('title')
     Home

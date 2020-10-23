@@ -22,4 +22,45 @@ class ArticleController extends Controller
 
         return view('articleViews')->with(compact('article'));
     }
+
+    public function manage()
+    {
+        $articles = Article::all();
+        // $articles = json_decode(json_encode($articles));
+        // echo "<pre>"; print_r($articles); die;
+        return view('admin.blog.articles.admin_view_article')->with(compact('articles'));
+    }
+
+    public function createArticle(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            Article::create([
+                'title' => $request->title,
+                'content' => $request->content,
+                'featured_image' => $request->image
+            ]);
+            return redirect('/admin/blog/articles')->with('flash_message_success', 'Data Berhasil Ditambahkan');
+        }
+        return view('admin.blog.articles.admin_add_article');
+    }
+
+    public function updateArticle($id, Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $article = Article::find($id);
+            $article->title = $request->title;
+            $article->content = $request->content;
+            $article->featured_image = $request->image;
+            $article->save();
+            return redirect('/admin/blog/articles')->with('flash_message_success', 'Data Berhasil Diubah');
+        }
+        $article = Article::find($id);
+        return view('admin.blog.articles.admin_edit_article')->with(compact('article'));
+    }
+
+    public function delete($id)
+    {
+        Article::find($id)->delete();
+        return redirect('/admin/blog/articles');
+    }
 }
