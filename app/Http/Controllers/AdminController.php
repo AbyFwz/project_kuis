@@ -10,36 +10,42 @@ class AdminController extends Controller
 {
     public function login(Request $request)
     {
-        if ($request->isMethod('POST')) {
-            $data = $request->input();
-            if (Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'admin'=>'1'])) {
-                // echo "Success"; die;
-                // $request->session()->put('adminSession', $data['email']);
-                Session::put('adminSession', $data['email']);
-                return redirect('/admin/dashboard');
-            } else {
-                // echo "Failed"; die;
-                return redirect('/admin')->with('flash_message_error','Invalid Username or Password');
+        $sessionStatus = $request->session()->get('adminSession');
+        if (isset($sessionStatus)) {
+            return redirect('/admin/dashboard');
+        } else {
+            if ($request->isMethod('POST')) {
+                $data = $request->input();
+                if (Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'admin'=>'1'])) {
+                    // echo "Success"; die;
+                    // $request->session()->put('adminSession', $data['email']);
+                    Session::put('adminSession', $data['email']);
+                    return redirect('/admin/dashboard');
+                } else {
+                    // echo "Failed"; die;
+                    return redirect('/admin')->with('flash_message_error','Invalid Username or Password');
+                }
+                
             }
-            
+            return view('admin.admin_login');
         }
-        return view('admin.admin_login');
+        
     }
-    
     public function logout(Request $request)
     {
         $request->session()->flush();
+        $request->session()->forget('adminSession');
         return redirect('/admin')->with('flash_message_success', 'Logout has Successfull');
     }
 
     public function dashboard()
     {
-        // if (Session::has('adminSession')) {
-        //     return view('admin.admin_dashboard');
-        // } else {
-        //     return redirect('/admin')->with('flash_message_error', 'Please Login to Access');
-        // }
-        return view('admin.admin_dashboard');
+        $sessionStatus = Session::get('adminSession');
+        if (isset($sessionStatus)) {
+            return view('admin.admin_dashboard');
+        } else {
+            return redirect('/admin')->with('flash_message_error', 'Please Login to Access');
+        }
     }
 
     public function settings()

@@ -36,7 +36,8 @@
                         <td>{{ $art->id }}</td>
                         <td>{{ $art->title }}</td>
                         <td>{{ Str::limit($art->content, 100, '...') }}</td>
-                        <td>{{ $art->featured_image }}</td>
+                        {{-- <td>{{ $art->featured_image }}</td> --}}
+                    <td><img src="{{ asset('/img/backend_img/articles/small/'.$art->featured_image) }}" alt="ImageCap"></td>
                         <td>{{ $art->created_at->format('d M, Y') }}</td>
                         <td>
                             <a href="edit-article/{{ $art->id }}" class="badge badge-warning">Edit</a>

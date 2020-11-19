@@ -14,7 +14,7 @@
     </div>
     <div class="form-group">
         <label for="image">Feature Image</label>
-        <input type="text" class="form-control" required="required" name="image" value="{{$article->featured_image}}"></br>
+        <input type="file" class="form-control" required="required" name="image"></br>
     </div>
     <button type="submit" name="edit" class="btn btn-primary float-right">Ubah Data</button>
 </form>

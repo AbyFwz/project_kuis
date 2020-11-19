@@ -25,7 +25,7 @@ Route::get('/about', 'AboutController')->name('about');
 Route::get('/article/{slug}', 'ArticleController@viewArticle');
 
 // Admin Page Group
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['adminLogin']], function () {
     // Admin Dashboard
     Route::get('/admin/dashboard', 'AdminController@dashboard');
     // Admin Settings
@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/blog/delete-article/{id}', 'ArticleController@delete');
 });
 // Admin Login
-Route::match(['get', 'post'], '/admin', 'AdminController@login');
+Route::match(['get', 'post'], '/admin', 'AdminController@login')->name('login');
 // Admin Logout
 Route::get('/logout', 'AdminController@logout');
 

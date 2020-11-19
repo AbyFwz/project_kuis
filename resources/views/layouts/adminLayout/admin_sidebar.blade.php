@@ -50,15 +50,11 @@
                         </div>
                     </nav>
                 </div> --}}
-                {{-- <div class="sb-sidenav-menu-heading">Addons</div>
-                <a class="nav-link" href="charts.html">
-                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                    Charts
+                <div class="sb-sidenav-menu-heading">User Management</div>
+                <a class="nav-link" href="{{ url('admin/user-management') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                    Users
                 </a>
-                <a class="nav-link" href="tables.html">
-                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                    Tables
-                </a> --}}
             </div>
         </div>
         <div class="sb-sidenav-footer">

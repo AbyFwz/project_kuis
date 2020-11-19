@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
+use Session;
+use Auth;
+use Image;
 
 class ArticleController extends Controller
 {
@@ -34,10 +38,28 @@ class ArticleController extends Controller
     public function createArticle(Request $request)
     {
         if ($request->isMethod('post')) {
+            // Upload Image
+            if ($request->file('image')) {
+                $image_tmp = $request->file('image');
+                if($image_tmp->isValid()){
+                    // echo "Sukses"; die;
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    $filename = rand(111,99999).'.'.$extension;
+                    $large_image_path = 'img/backend_img/articles/large/'.$filename;
+                    $medium_image_path = 'img/backend_img/articles/medium/'.$filename;
+                    $small_image_path = 'img/backend_img/articles/small/'.$filename;
+                    // Resize Image
+                    Image::make($image_tmp)->save($large_image_path);
+                    Image::make($image_tmp)->resize(600,600)->save($medium_image_path);
+                    Image::make($image_tmp)->resize(300,300)->save($small_image_path);
+                    
+                }
+                // echo "Sukses"; die;
+            }
             Article::create([
                 'title' => $request->title,
                 'content' => $request->content,
-                'featured_image' => $request->image
+                'featured_image' => $filename
             ]);
             return redirect('/admin/blog/articles')->with('flash_message_success', 'Data Berhasil Ditambahkan');
         }
@@ -47,6 +69,7 @@ class ArticleController extends Controller
     public function updateArticle($id, Request $request)
     {
         if ($request->isMethod('post')) {
+            
             $article = Article::find($id);
             $article->title = $request->title;
             $article->content = $request->content;
