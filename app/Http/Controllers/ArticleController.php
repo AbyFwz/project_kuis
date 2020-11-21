@@ -42,7 +42,6 @@ class ArticleController extends Controller
             if ($request->file('image')) {
                 $image_tmp = $request->file('image');
                 if($image_tmp->isValid()){
-                    // echo "Sukses"; die;
                     $extension = $image_tmp->getClientOriginalExtension();
                     $filename = rand(111,99999).'.'.$extension;
                     $large_image_path = 'img/backend_img/articles/large/'.$filename;
@@ -54,7 +53,6 @@ class ArticleController extends Controller
                     Image::make($image_tmp)->resize(300,300)->save($small_image_path);
                     
                 }
-                // echo "Sukses"; die;
             }
             Article::create([
                 'title' => $request->title,
@@ -63,13 +61,19 @@ class ArticleController extends Controller
             ]);
             return redirect('/admin/blog/articles')->with('flash_message_success', 'Data Berhasil Ditambahkan');
         }
+        // View Create Form
         return view('admin.blog.articles.admin_add_article');
     }
 
     public function updateArticle($id, Request $request)
     {
         if ($request->isMethod('post')) {
-            
+            if ($request->file('image')) {
+                $image_tmp = $request->file('image');
+                if ($image_tmp->isValid()) {
+                    # code...
+                }
+            }
             $article = Article::find($id);
             $article->title = $request->title;
             $article->content = $request->content;
