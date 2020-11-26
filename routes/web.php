@@ -40,6 +40,8 @@ Route::group(['middleware' => ['adminLogin']], function () {
     Route::match(['get', 'post'], '/admin/blog/edit-article/{id}', 'ArticleController@updateArticle');
     // Articles Manage Delete
     Route::get('/admin/blog/delete-article/{id}', 'ArticleController@delete');
+    // Articles Manage Cetak PDF
+    Route::get('/admin/blog/cetak_pdf', 'ArticleController@cetakArticlesPDF');
 
     // Users //
     // Users Manage View
@@ -50,6 +52,8 @@ Route::group(['middleware' => ['adminLogin']], function () {
     Route::match(['get', 'post'], '/admin/users/edit/{id}', 'UserController@updateUser');
     // Users Manage Delete
     Route::get('/admin/users/delete/{id}', 'UserController@deleteUser');
+    // User Manage Cetak PDF
+    Route::get('/admin/users/cetak_pdf', 'UserController@cetakUsersPDF');
 
     // Roles //
     // Roles Manage View
@@ -60,6 +64,8 @@ Route::group(['middleware' => ['adminLogin']], function () {
     Route::match(['get', 'post'], '/admin/users/roles/edit/{id}', 'UserController@updateRole');
     // Roles Manage Delete
     Route::get('/admin/users/roles/delete/{id}', 'UserController@deleteRole');
+    // Roles Manage Cetak PDF
+    Route::get('/admin/users/roles/cetak_pdf', 'UserController@cetakRolesPDF');
 
     // Admin Logout
     Route::get('/logout', 'AdminController@logout');

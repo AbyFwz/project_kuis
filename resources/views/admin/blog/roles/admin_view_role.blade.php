@@ -1,11 +1,12 @@
 @extends('layouts.adminLayout.admin_design')
-@section('page-title', 'Manage Articles')
+@section('page-title', 'Manage Roles')
 @section('content')
 <div class="card mb-4">
     <div class="card-header">
         <i class="fas fa-table mr-1"></i>
         <span>List of Article</span>
-        <a href="{{ url('admin/blog/add-article') }}" class="btn btn-success float-right">Tambah Data</a>
+        <a href="{{ url('admin/users/roles/add') }}" class="btn btn-success float-right">Tambah Data</a>
+        <a href="{{ url('admin/users/roles/cetak_pdf') }}" class="btn btn-success float-right" style="margin-right: 2.5px">Cetak PDF</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -25,13 +26,13 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach ($roles as $art)
+                    @foreach ($roles as $rls)
                     <tr>
-                        <td>{{ $art->role_id }}</td>
-                        <td>{{ $art->nama_role }}</td>
+                        <td>{{ $rls->role_id }}</td>
+                        <td>{{ $rls->nama_role }}</td>
                         <td>
-                            <a href="edit-article/{{ $art->id }}" class="badge badge-warning">Edit</a>
-                            <a href="delete-article/{{ $art->id }}" class="badge badge-danger">Delete</a>
+                            <a href="roles/edit/{{ $rls->role_id }}" class="badge badge-warning">Edit</a>
+                            <a href="roles/delete/{{ $rls->role_id }}" class="badge badge-danger">Delete</a>
                         </td>
                     </tr>
                     @endforeach

@@ -6,6 +6,7 @@
         <i class="fas fa-table mr-1"></i>
         <span>List of Article</span>
         <a href="{{ url('admin/blog/add-article') }}" class="btn btn-success float-right">Tambah Data</a>
+        <a href="{{ url('admin/blog/cetak_pdf') }}" class="btn btn-success float-right" style="margin-right: 2.5px">Cetak PDF</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">

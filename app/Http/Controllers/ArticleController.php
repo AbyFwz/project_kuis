@@ -11,6 +11,7 @@ use Session;
 use Auth;
 use Image;
 use File;
+use PDF;
 
 class ArticleController extends Controller
 {

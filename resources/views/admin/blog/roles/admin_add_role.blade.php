@@ -1,7 +1,7 @@
 @extends('layouts.adminLayout.admin_design')
-@section('page-title', 'Add Users')
+@section('page-title', 'Add Roles')
 @section('content')
-<form action="/admin/blog/add-article" method="POST" enctype="multipart/form-data">
+<form action="/admin/users/roles/add" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
     <label for="title">Nama Role</label>

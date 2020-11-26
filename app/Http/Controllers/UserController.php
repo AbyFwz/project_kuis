@@ -7,6 +7,8 @@ use App\User;
 use App\Role;
 use Illuminate\Support\Facades\Hash;
 use Image;
+use File;
+use PDF;
 
 class UserController extends Controller
 {
@@ -98,10 +100,46 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect('/admin/users');
     }
+    public function cetakUsersPDF()
+    {
+        $users = User::all();
+        $pdf = PDF::loadview('admin.blog.users.admin_cetak_user')->with(compact('users'));
+        return $pdf->stream();
+    }
     // Roles //
     public function viewRole()
     {
         $roles = Role::all();
         return view('admin.blog.roles.admin_view_role')->with(compact('roles'));
+    }
+    public function createRole(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            Role::create([
+                'nama_role' => $request->nama_role
+            ]);
+            return redirect('/admin/users/roles');
+        }
+        return view('admin.blog.roles.admin_add_role');
+    }
+    public function updateRole($id, Request $request)
+    {
+        $roles = Role::where('role_id', '=', $id)->first();
+        if ($request->isMethod('POST')) {
+            Role::where('role_id', '=', $id)->update(array('nama_role' => $request->nama_role));
+            return redirect('admin/users/roles');
+        }
+        return view('admin.blog.roles.admin_edit_role')->with(compact('roles'));
+    }
+    public function deleteRole($id)
+    {
+        Role::where('role_id', '=', $id)->delete();
+        return redirect('/admin/users/roles');
+    }
+    public function cetakRolesPDF()
+    {
+        $roles = Role::all();
+        $pdf = PDF::loadview('admin.blog.users.admin_cetak_user')->with(compact('roles'));
+        return $pdf->stream();
     }
 }

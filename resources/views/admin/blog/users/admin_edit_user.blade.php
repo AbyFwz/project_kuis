@@ -19,10 +19,10 @@
     <div class="form-group">
         <select name="role" class="form-control">
             @foreach ($roles as $rls)
-                <option value="{{ $rls->role_id }}">{{ $rls->nama_role }}</option>
+                <option @if($rls->role_id == $users->role_id) selected @endif value="{{ $rls->role_id }}">{{ $rls->nama_role }}</option>
             @endforeach
         </select><br>
     </div>
-    <button type="submit" name="add" class="btn btn-primary float-right">Tambah Data</button>
+    <button type="submit" name="add" class="btn btn-primary float-right">Tambah Data</button><br>
 </form>
 @endsection
