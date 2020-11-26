@@ -116,4 +116,10 @@ class ArticleController extends Controller
         Article::find($id)->delete();
         return redirect('/admin/blog/articles');
     }
+    public function cetakArticlesPDF()
+    {
+        $articles = Article::all();
+        $pdf = PDF::loadview('admin.blog.articles.admin_cetak_article', ['articles'=>$articles]);
+        return $pdf->stream();
+    }
 }

@@ -103,7 +103,7 @@ class UserController extends Controller
     public function cetakUsersPDF()
     {
         $users = User::all();
-        $pdf = PDF::loadview('admin.blog.users.admin_cetak_user')->with(compact('users'));
+        $pdf = PDF::loadview('admin.blog.users.admin_cetak_user', ['users'=>$users]);
         return $pdf->stream();
     }
     // Roles //
@@ -139,7 +139,7 @@ class UserController extends Controller
     public function cetakRolesPDF()
     {
         $roles = Role::all();
-        $pdf = PDF::loadview('admin.blog.users.admin_cetak_user')->with(compact('roles'));
+        $pdf = PDF::loadview('admin.blog.roles.admin_cetak_role', ['roles'=>$roles]);
         return $pdf->stream();
     }
 }
