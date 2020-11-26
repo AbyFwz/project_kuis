@@ -16,13 +16,10 @@ class AdminController extends Controller
         } else {
             if ($request->isMethod('POST')) {
                 $data = $request->input();
-                if (Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'admin'=>'1'])) {
-                    // echo "Success"; die;
-                    // $request->session()->put('adminSession', $data['email']);
+                if (Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'role_id'=>'1'])) {
                     Session::put('adminSession', $data['email']);
                     return redirect('/admin/dashboard');
                 } else {
-                    // echo "Failed"; die;
                     return redirect('/admin')->with('flash_message_error','Invalid Username or Password');
                 }
                 

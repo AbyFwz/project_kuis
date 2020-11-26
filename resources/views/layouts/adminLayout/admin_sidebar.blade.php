@@ -51,9 +51,13 @@
                     </nav>
                 </div> --}}
                 <div class="sb-sidenav-menu-heading">User Management</div>
-                <a class="nav-link" href="{{ url('admin/user-management') }}">
+                <a class="nav-link" href="{{ url('admin/users') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                     Users
+                </a>
+                <a class="nav-link" href="{{ url('admin/users/roles') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                    Roles
                 </a>
             </div>
         </div>
