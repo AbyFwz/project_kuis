@@ -19,7 +19,9 @@ class AdminController extends Controller
                 if (Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'role_id'=>'1'])) {
                     Session::put('adminSession', $data['email']);
                     return redirect('/admin/dashboard');
-                } else {
+                } elseif (Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'role_id'=>'2'])) {
+                    return redirect('/admin')->with('flash_message_error','Anda Tidak Memiliki Cukup Akses');
+                }else {
                     return redirect('/admin')->with('flash_message_error','Invalid Username or Password');
                 }
                 

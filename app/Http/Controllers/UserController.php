@@ -102,7 +102,7 @@ class UserController extends Controller
     }
     public function cetakUsersPDF()
     {
-        $users = User::all();
+        $users = User::join('roles', 'roles.role_id', '=', 'users.role_id')->get();
         $pdf = PDF::loadview('admin.blog.users.admin_cetak_user', ['users'=>$users]);
         return $pdf->stream();
     }
